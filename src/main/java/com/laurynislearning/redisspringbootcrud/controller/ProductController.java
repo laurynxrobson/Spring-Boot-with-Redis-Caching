@@ -33,10 +33,12 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product product) {
+    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product product, String name, String description) {
         Optional<Product> existingProduct = productService.getProductById(id);
         if (existingProduct.isPresent()) {
             product.setId(id);
+            product.setName(name);
+            product.setDescription(description);
             return ResponseEntity.ok(productService.saveProduct(product));
         } else {
             return ResponseEntity.notFound().build();
