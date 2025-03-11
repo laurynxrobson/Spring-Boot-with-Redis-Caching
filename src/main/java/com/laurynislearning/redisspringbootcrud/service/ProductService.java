@@ -16,6 +16,7 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+
     @Cacheable(value = "products", key = "#id")
     public Optional<Product> getProductById(Long id) {
         System.out.println("Fetching product from database...");
@@ -26,6 +27,7 @@ public class ProductService {
     public Product saveProduct(Product product) {
         return productRepository.save(product);
     }
+
 
     @CacheEvict(value = "products", key = "#id")
     public void deleteProduct(Long id) {
